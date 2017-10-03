@@ -1,0 +1,28 @@
+<h1> Hello Wolrd, My name is {{name}} </h1>
+<p> Enter Name: </p>
+ <input type="text" [(ngModel)]="name"> 
+ <button (click)="printName()">Click Me </button>
+ <p> You Entered: {{name}}</p>
+
+ <!-- add check box here -->
+ <input type="checkbox" [(ngModel)]="isChecked"/> {{isChecked ? 'Hide' : 'Show'}} 
+ 
+ <p> Checkbox Status: {{isChecked}}</p>
+
+ <hr>
+
+ <div *ngIf="isChecked">
+ <h2> Calculator </h2>
+
+ <input type="number" (change)="addition()" [(ngModel)]= "num1">
++
+<input type="number" (change)="addition()" [(ngModel)]="num2">
+=
+{{totalSum}}
+
+<hr> 
+ </div>
+ <hr>
+ <br>
+<app-to-do></app-to-do>
+

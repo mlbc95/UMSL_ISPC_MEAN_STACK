@@ -1,0 +1,17 @@
+<h1> To Do </h1> 
+<input type="text" [(ngModel)]="toDo"/> 
+       <span> 
+           <button (click)="addToList()"> Add </button> 
+       </span>
+
+       <div>
+           <ul>
+               <li *ngFor="let item of toDoList; let i = index"> {{item}}
+                   <span>
+                       <button (click)="delete(i)"> Remove</button>
+                   </span>
+                  </li>
+           </ul>
+           <button (click)="saveToDoList()"> Save </button>
+       </div>
+
