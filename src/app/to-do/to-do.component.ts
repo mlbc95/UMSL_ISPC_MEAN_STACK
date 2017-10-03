@@ -13,8 +13,11 @@ export class ToDoComponent implements OnInit {
   toDoList:string[]=[];
 
   ngOnInit() {
+    if(JSON.parse(localStorage.getItem('toDoList')) ===null){
+    
+    }else{
   this.toDoList = JSON.parse(localStorage.getItem('toDoList'))
-
+    }
   }
   addToList(){ 
     if(this.toDo==""|| !this.toDo)
