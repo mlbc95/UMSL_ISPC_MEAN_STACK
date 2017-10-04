@@ -1,0 +1,22 @@
+<h2>Todo List: </h2>
+<ol *ngIf="todoList.length > 0;else noTodo">
+  <!-- <li *ngFor="let todo of todoList; let i = index">
+    <input type="text" [ngModel]="todo" #todoInput [readonly]="!editClicked">
+    <button type="button" (click)="editClicked = !editClicked" *ngIf="!editClicked">Edit</button>
+    <button type="button" (click)="onEditSubmit(todoInput.value, i)" *ngIf="editClicked">Submit</button>
+    <button type="button" (click)="todoInput.value = todo; editClicked = !editClicked" *ngIf="editClicked">Cancel</button>
+    <button type="button" (click)="onDeleteClick(i) ">Delete</button>
+  </li> -->
+  <!-- implement model -->
+  <li *ngFor="let todo of todoList; let i = index">
+    <input type="text" [ngModel]="todo.content" #todoInput [readonly]="!todo.isEditing">
+    <button type="button" (click)="todo.isEditing = !todo.isEditing" *ngIf="!todo.isEditing">Edit</button>
+    <button type="button" (click)="onEditSubmit(todoInput.value, i)" *ngIf="todo.isEditing">Submit</button>
+    <button type="button" (click)="todoInput.value = todo.content; todo.isEditing = !todo.isEditing" *ngIf="todo.isEditing">Cancel</button>
+    <button type="button" (click)="onDeleteClick(i)">Delete</button>
+  </li>
+</ol>
+
+<ng-template #noTodo>
+  <h4>Todo List is empty. Let's add some.</h4>
+</ng-template>
