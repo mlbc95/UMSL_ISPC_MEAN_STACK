@@ -9,7 +9,7 @@
   </li> -->
   <!-- implement model -->
   <li *ngFor="let todo of todoList; let i = index">
-    <input type="text" [ngModel]="todo.content" #todoInput [readonly]="!todo.isEditing">
+    <input type="text" [ngModel]="todo.content" #todoInput [readonly]="!todo.isEditing"><br>
     <button type="button" (click)="todo.isEditing = !todo.isEditing" *ngIf="!todo.isEditing">Edit</button>
     <button type="button" (click)="onEditSubmit(todoInput.value, i)" *ngIf="todo.isEditing">Submit</button>
     <button type="button" (click)="todoInput.value = todo.content; todo.isEditing = !todo.isEditing" *ngIf="todo.isEditing">Cancel</button>

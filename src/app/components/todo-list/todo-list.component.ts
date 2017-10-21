@@ -38,7 +38,7 @@ export class TodoListComponent implements OnInit {
 
      onEditSubmit(editedContent: string, index: number) { //Implement Model
        this.todoService.editTodoItem(editedContent, index);
-       this.todoList[index].isEditing = !this.todoList[index].isEditing;
+       this.todoList[index].isEditing = false;
      }
 
 }

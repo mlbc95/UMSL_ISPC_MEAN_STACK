@@ -47,6 +47,7 @@ export class TodoService {
 
   editTodoItem(editedContent: string, index: number) { //Implement Model
     this.todoList[index].content = editedContent;
+    this.todoList[index].isEditing = false;
     this.saveTodoList();
   } 
 
