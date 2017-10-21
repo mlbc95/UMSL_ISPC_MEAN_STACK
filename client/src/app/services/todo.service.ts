@@ -20,17 +20,15 @@ export class TodoService {
     private http: Http
   ) { }
 
-  getTodoList(): Observable<any> {
+  getTodoList() {
     // this.todoList = this.localStorageService.fetchValueFromKey('todoList')
     //   ? this.localStorageService.fetchObjectValueFromKey('todoList')
     //   : [];
     // return this.todoList;
-    return this.http.get('http://localhost:3000/todos')
-      .map(
-        (res: Response): Promise<any> => {
-          return res.json();
-        }
-      )
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/todos',{headers:headers}).map(res=>res.json());
+     
   }
 
   saveTodoList() {
@@ -52,23 +50,22 @@ export class TodoService {
     this.saveTodoList();
   }
 
-  addTodoItem(newTodoItem: Todo): Observable<any> { //Implement Model
+  addTodoItem(newTodoItem){ 
+    
+    //Implement Model
     // this.todoList.push(newTodoItem);
     // this.saveTodoList();
-    let body = {
-      content: newTodoItem.content
-    }
+
     let headers: Headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let options: RequestOptions = new RequestOptions({ headers: headers });
+
+    let body = {
+      content: newTodoItem
+    }
+   
     console.log(body);
-    return this.http.post('http://localhost:3000/todos/add', body, options)
-      .map(
-        (res: Response): Promise<any> => {
-          this.newTodoAdded.emit(res.json().todo);
-          return res.json();
-        }
-      ); 
+    return this.http.post('http://localhost:3000/todos/add', body,{headers: headers}).map(res=>res.json())
+  
   }
 
   editTodoItem(editedContent: string, index: number) { //Implement Model

@@ -10,13 +10,13 @@ import { Todo } from '../../models/todo';
 })
 export class TodoListComponent implements OnInit {
 
-  // private todoList: Array<string>;
-  // private todoItem: string;
-  // private editClicked: boolean = false;
+  private todoList: Array<string>=[];
+  private todoItem: string;
+  private editClicked: boolean = false;
 
-  //Implementing Model
-  private todoList: Array<Todo> = [];
-  private todoItem: Todo;
+  //Implementing Model 
+  // private todoList: Array<Todo> = [];
+  // private todoItem: Todo;
 
   constructor(
     private todoService: TodoService
@@ -24,28 +24,33 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.getTodoList();
-    console.log(this.todoList);
-    this.todoService.newTodoAdded.subscribe(
-      (data: any) => {
-        console.log(data);
-        this.todoList.push(data);
-      }
-    )
+    this.todoService.getTodoList().subscribe(data=>{
+      this.todoList = data.todos;
+      console.log(data)
+    })
+    
+    // console.log(this.todoList);
+    // this.todoService.newTodoAdded.subscribe(
+    //   (data: any) => {
+    //     console.log(data);
+    //     this.todoList.push(data);
+    //   }
+    // )
   }
 
-  // onEditSubmit(editedTodo: string, index: number) {
-  //   this.todoService.editTodoItem(editedTodo, index);
-  //   this.editClicked = !this.editClicked;
-  // }
+  onEditSubmit(editedTodo: string, index: number) {
+    this.todoService.editTodoItem(editedTodo, index);
+    this.editClicked = !this.editClicked;
+  }
 
     onDeleteClick(index: number) {
       this.todoService.deleteTodoItem(index);
     }
 
-     onEditSubmit(editedContent: string, index: number) { //Implement Model
-       this.todoService.editTodoItem(editedContent, index);
-       this.todoList[index].isEditing = !this.todoList[index].isEditing;
-     }
+    //  onEditSubmit(editedContent: string, index: number) { //Implement Model
+    //    this.todoService.editTodoItem(editedContent, index);
+    //    this.todoList[index].isEditing = !this.todoList[index].isEditing;
+    //  }
 
      getTodoList() {
       this.todoService.getTodoList().subscribe(
