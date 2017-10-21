@@ -50,7 +50,7 @@ export class TodoService {
     this.saveTodoList();
   }
 
-  addTodoItem(newTodoItem){ 
+  addTodoItem(newTodoItem: string){ 
     
     //Implement Model
     // this.todoList.push(newTodoItem);

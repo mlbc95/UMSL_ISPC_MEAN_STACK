@@ -23,7 +23,9 @@ export class TodoInputComponent implements OnInit {
 
   onAddTodoClick() {
     console.log('Input', this.todoItem);
-    this.todoService.addTodoItem(this.todoItem);
+    this.todoService.addTodoItem(this.todoItem).subscribe(
+      data =>  console.log(data)
+    );
     this.todoItem = '';
   }
  
