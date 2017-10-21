@@ -12,6 +12,7 @@ const TodoSchema = new Schema({
     },
     completed: {
         type: String,
+        required: true,
         default: false
     }
 });

@@ -5,6 +5,7 @@ const Todo = require('../models/Todo');
 
 //Add Todo
 router.post('/add', (req, res) => {
+    console.log(req.body);
     let newTodo = new Todo({
         content: req.body.content
     });

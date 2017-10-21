@@ -19,6 +19,7 @@ app.use(cors());
 
 //Body Parser Middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 const port = 3000;
 

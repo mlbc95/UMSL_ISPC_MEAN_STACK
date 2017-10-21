@@ -1,4 +1,5 @@
 export interface Todo {
   content: string;
-  isEditing: boolean;
+  isEditing?: boolean;
+  completed?: boolean;
 }

@@ -23,8 +23,14 @@ export class TodoListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.todoList = this.todoService.getTodoList();
+    this.getTodoList();
     console.log(this.todoList);
+    this.todoService.newTodoAdded.subscribe(
+      (data: any) => {
+        console.log(data);
+        this.todoList.push(data);
+      }
+    )
   }
 
   // onEditSubmit(editedTodo: string, index: number) {
@@ -39,6 +45,14 @@ export class TodoListComponent implements OnInit {
      onEditSubmit(editedContent: string, index: number) { //Implement Model
        this.todoService.editTodoItem(editedContent, index);
        this.todoList[index].isEditing = !this.todoList[index].isEditing;
+     }
+
+     getTodoList() {
+      this.todoService.getTodoList().subscribe(
+        (data: any): void => {
+          this.todoList = data.todos;
+        }
+      );
      }
 
 }

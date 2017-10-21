@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Todo } from '../../models/todo';
 import { TodoService } from '../../services/todo.service';
@@ -12,7 +12,7 @@ export class TodoInputComponent implements OnInit {
   // public todoItem: string;
   public todoItem: Todo;
   public content: string = '';
-
+  @Output() todoAdded: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private todoService: TodoService
   ) { }
@@ -29,10 +29,14 @@ export class TodoInputComponent implements OnInit {
   onAddTodoClick() { //Implement Model
     console.log(this.content);
     let newTodoItem: Todo = {
-      content: this.content,
-      isEditing: false
+      content: this.content
     }
-    this.todoService.addTodoItem(newTodoItem);
+    this.todoService.addTodoItem(newTodoItem).subscribe(
+      (data: any): void => {
+        console.log(data);
+      }
+    );
     this.content = ''; 
+    this.todoAdded.emit();
   }
 }
