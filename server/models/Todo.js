@@ -27,3 +27,30 @@ module.exports.addTodo = (newTodo, callback) => {
 module.exports.getAllTodos = (callback) => {
     Todo.find(callback);
 }
+
+module.exports.updateTodo = (id, content, callback) => {
+    Todo.findByIdAndUpdate(id, {
+            $set: {
+                content: content
+            }
+        }, {
+            new: true
+        })
+        .exec(callback);
+}
+
+module.exports.completeTodo = (id, callback) => {
+    Todo.findByIdAndUpdate(id, {
+            $set: {
+                completed: true
+            }
+        }, {
+            new: true
+        })
+        .exec(callback);
+}
+
+module.exports.removeTodo = (id, callback) => {
+    Todo.findByIdAndRemove(id)
+        .exec(callback);
+}

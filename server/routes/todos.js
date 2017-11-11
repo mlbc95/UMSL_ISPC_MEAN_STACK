@@ -13,7 +13,7 @@ router.post('/add', (req, res) => {
     });
 
     Todo.addTodo(newTodo, (error, todo) => {
-        if(error) {
+        if (error) {
             return res.json({
                 success: false,
                 title: 'Error',
@@ -34,7 +34,7 @@ router.post('/add', (req, res) => {
 //Get All Todos //localhost:3000/todos/
 router.get('/', (req, res) => {
     Todo.getAllTodos((error, todos) => {
-        if(error) {
+        if (error) {
             return res.json({
                 success: false,
                 title: 'Error',
@@ -48,6 +48,69 @@ router.get('/', (req, res) => {
             title: 'Success',
             message: 'All todos fetched',
             todos: todos
+        });
+    });
+});
+
+//Update Todo
+router.put('/:id', (req, res) => {
+    Todo.updateTodo(req.params.id, req.body.content, (error, todo) => {
+        if (error) {
+            return res.json({
+                success: false,
+                title: 'Error',
+                message: 'Error updating todo',
+                error: error
+            });
+        }
+
+        res.json({
+            success: true,
+            title: 'Success',
+            message: 'Todo updated',
+            todo: todo
+        });
+    });
+});
+
+//Complete Todo
+router.put('/todo/:id', (req, res) => {
+    Todo.completeTodo(req.params.id, (error, todo) => {
+        if (error) {
+            return res.json({
+                success: false,
+                title: 'Error',
+                message: 'Error completed todo',
+                error: error
+            });
+        }
+
+        res.json({
+            success: true,
+            title: 'Success',
+            message: 'Todo updated',
+            todo: todo
+        });
+    });
+});
+
+//Remove Todo
+router.delete('/:id', (req, res) => {
+    Todo.removeTodo(req.params.id, (error, todo) => {
+        if (error) {
+            return res.json({
+                success: false,
+                title: 'Error',
+                message: 'Error removing todo',
+                error: error
+            });
+        }
+
+        res.json({
+            success: true,
+            title: 'Success',
+            message: 'Todo removed',
+            todo: todo
         });
     });
 });
